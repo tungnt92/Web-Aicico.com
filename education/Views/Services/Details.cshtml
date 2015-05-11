@@ -1,0 +1,98 @@
+﻿@model education.Models.content
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>content</h4>
+	<hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.title)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.title)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.introtext)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.introtext)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.fulltext)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.fulltext)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.state)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.state)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.catid)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.catid)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.created)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.created)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.create_by)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.create_by)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.image)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.image)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ordering)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ordering)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.hit)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.hit)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

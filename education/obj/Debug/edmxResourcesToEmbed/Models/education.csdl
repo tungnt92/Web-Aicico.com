@@ -1,0 +1,96 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="educationModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="category">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="parent_id" Type="Int32" />
+    <Property Name="level" Type="Int32" />
+    <Property Name="path" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="title" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="note" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="discription" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="image" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="contents" Relationship="educationModel.FK_content_ToTable" FromRole="category" ToRole="content" />
+  </EntityType>
+  <EntityType Name="content">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="title" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="introtext" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="fulltext" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="state" Type="Int32" />
+    <Property Name="catid" Type="Int32" />
+    <Property Name="created" Type="DateTime" Precision="3" />
+    <Property Name="create_by" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="image" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="ordering" Type="Int32" />
+    <Property Name="hit" Type="Int32" />
+    <NavigationProperty Name="category" Relationship="educationModel.FK_content_ToTable" FromRole="content" ToRole="category" />
+    <Property Name="note" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+  </EntityType>
+  <EntityType Name="mediagallery">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="filename" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="caption" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+    <Property Name="published" Type="Int32" />
+    <Property Name="ordering" Type="Int32" />
+  </EntityType>
+  <EntityType Name="menu">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="title" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="note" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="link" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="parent_id" Type="Int32" />
+    <Property Name="level" Type="Int32" />
+    <Property Name="ordering" Type="Int32" />
+    <Property Name="home" Type="Int32" />
+    <Property Name="image" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="published" Type="Int32" />
+  </EntityType>
+  <EntityType Name="user">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="email" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="fullname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="address" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="image" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="level" Type="Int32" />
+  </EntityType>
+  <EntityContainer Name="educationEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="categories" EntityType="Self.category" />
+    <EntitySet Name="contents" EntityType="Self.content" />
+    <EntitySet Name="mediagalleries" EntityType="Self.mediagallery" />
+    <EntitySet Name="menus" EntityType="Self.menu" />
+    <EntitySet Name="users" EntityType="Self.user" />
+    <AssociationSet Name="FK_content_ToTable" Association="educationModel.FK_content_ToTable">
+      <End Role="category" EntitySet="categories" />
+      <End Role="content" EntitySet="contents" />
+    </AssociationSet>
+  </EntityContainer>
+  <Association Name="FK_content_ToTable">
+    <End Type="educationModel.category" Role="category" Multiplicity="0..1" />
+    <End Type="educationModel.content" Role="content" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="category">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="content">
+        <PropertyRef Name="catid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>
